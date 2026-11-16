@@ -27,7 +27,7 @@ const CLUBS = [
 
 const WEEKS = 38;
 const WINDOW = 3;
-const STEP_MS = 460;
+const STEP_MS = 350;
 const ZOOM_MS = 1500;
 
 const chartEl = document.getElementById("chart");
