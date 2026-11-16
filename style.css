@@ -181,7 +181,7 @@ h1 {
   color: var(--muted);
   font-size: 0.86rem;
   line-height: 1.45;
-  max-width: 62ch;
+  max-width: none;
 }
 
 .visually-hidden {
