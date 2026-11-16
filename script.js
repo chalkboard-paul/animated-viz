@@ -215,8 +215,8 @@ function draw(points, domain) {
     .attr("clip-path", "url(#plot-clip)");
 
   const boundaries = [
-    { label: "Top four", position: 4.5 },
-    { label: "Relegation", position: 17.5 },
+    { label: "Top four", position: 4.5, color: "#2F6B3B" },
+    { label: "Relegation", position: 17.5, color: "#A83232" },
   ];
 
   const zoneGroups = plot.select(".zones")
@@ -234,7 +234,7 @@ function draw(points, domain) {
     .attr("x2", innerW)
     .attr("y1", (d) => y(d.position))
     .attr("y2", (d) => y(d.position))
-    .attr("stroke", "#78716c")
+    .attr("stroke", (d) => d.color)
     .attr("stroke-width", 1.5)
     .attr("stroke-dasharray", "2 4")
     .attr("stroke-linecap", "round");
@@ -243,9 +243,9 @@ function draw(points, domain) {
     .attr("x", innerW - 4)
     .attr("y", (d) => y(d.position) + (d.position < 10 ? -6 : 14))
     .attr("text-anchor", "end")
-    .attr("fill", "#78716c")
+    .attr("fill", (d) => d.color)
     .text((d) => d.label);
-
+   
   const yTicks = innerH >= 380 ? d3.range(1, 21) : [1, 5, 10, 15, 20];
   plot.select(".grid")
     .selectAll("line")
