@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#E30613">
+  <meta name="description" content="Animated chart of Premier League 2025/26 position after each matchweek. Opens on Brentford.">
+  <title>Brentford · Premier League 2025/26</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main>
+    <header class="hero">
+      <p class="kicker">Premier League · 2025/26</p>
+      <div class="heading">
+        <h1 id="team-name">Brentford</h1>
+        <p id="position" class="position" aria-hidden="true">–</p>
+      </div>
+      <p id="detail" class="detail">Position after each matchweek</p>
+    </header>
+
+    <div class="actions">
+      <button id="replay" class="btn btn-primary" type="button">Replay</button>
+      <button id="change-team" class="btn btn-secondary" type="button" aria-haspopup="dialog" aria-controls="picker">Change team</button>
+    </div>
+
+    <section class="chart-card" aria-labelledby="chart-title">
+      <h2 id="chart-title" class="visually-hidden">League position by matchweek</h2>
+      <div class="chart-meta">
+        <p id="view-label">Opening matchweeks</p>
+        <ul class="legend">
+          <li><span class="key top"></span>Top four</li>
+          <li><span class="key drop"></span>Relegation</li>
+        </ul>
+      </div>
+      <div id="chart" role="img" aria-label="Brentford. Animated league position for the 2025/26 season."></div>
+      <p id="tip" class="tip" hidden></p>
+    </section>
+
+    <p class="note">The line is league place after each matchweek, ranked by points, then goal difference, then goals scored.</p>
+    <p id="live" class="visually-hidden" aria-live="polite"></p>
+  </main>
+
+  <dialog id="picker" aria-labelledby="picker-title">
+    <div class="picker">
+      <div class="picker-head">
+        <div>
+          <h2 id="picker-title">Change team</h2>
+          <p class="picker-note">Final place, 2025/26</p>
+        </div>
+        <button id="close-picker" class="btn btn-secondary" type="button">Close</button>
+      </div>
+      <div id="team-list" class="team-list"></div>
+    </div>
+  </dialog>
+
+  <noscript>
+    <p class="note">This chart needs JavaScript, and it loads D3 from a CDN.</p>
+  </noscript>
+
+  <script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
