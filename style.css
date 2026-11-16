@@ -161,17 +161,18 @@ h1 {
 }
 
 .key {
-  width: 0.7rem;
-  height: 0.7rem;
-  border-radius: 2px;
+  width: 0.9rem;
+  height: 0;
+  border-top: 2px dotted;
+  border-radius: 0;
 }
 
 .key.top {
-  background: rgba(21, 128, 61, 0.45);
+  border-color: #15803d;
 }
 
 .key.drop {
-  background: rgba(185, 28, 28, 0.4);
+  border-color: #b91c1c;
 }
 
 #chart {
