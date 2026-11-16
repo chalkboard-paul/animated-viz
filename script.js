@@ -214,20 +214,38 @@ function draw(points, domain) {
     .attr("transform", `translate(${margin.left},${margin.top})`)
     .attr("clip-path", "url(#plot-clip)");
 
-  const zones = [
-    { y0: 0.5, y1: 4.5, fill: "rgba(21, 128, 61, 0.1)" },
-    { y0: 17.5, y1: 20.5, fill: "rgba(185, 28, 28, 0.08)" },
+  const boundaries = [
+    { label: "Top four", position: 4.5, color: "#2F6B3B" },
+    { label: "Relegation", position: 17.5, color: "#A83232" },
   ];
-  plot.select(".zones")
-    .selectAll("rect")
-    .data(zones)
-    .join("rect")
-    .attr("x", 0)
-    .attr("width", innerW)
-    .attr("y", (d) => y(d.y0))
-    .attr("height", (d) => Math.max(0, y(d.y1) - y(d.y0)))
-    .attr("fill", (d) => d.fill);
 
+  const zoneGroups = plot.select(".zones")
+    .selectAll("g.zone")
+    .data(boundaries, (d) => d.label)
+    .join((enter) => {
+      const group = enter.append("g").attr("class", "zone");
+      group.append("line");
+      group.append("text");
+      return group;
+    });
+
+  zoneGroups.select("line")
+    .attr("x1", 0)
+    .attr("x2", innerW)
+    .attr("y1", (d) => y(d.position))
+    .attr("y2", (d) => y(d.position))
+    .attr("stroke", (d) => d.color)
+    .attr("stroke-width", 1.5)
+    .attr("stroke-dasharray", "2 4")
+    .attr("stroke-linecap", "round");
+
+  zoneGroups.select("text")
+    .attr("x", innerW - 4)
+    .attr("y", (d) => y(d.position) + (d.position < 10 ? -6 : 14))
+    .attr("text-anchor", "end")
+    .attr("fill", (d) => d.color)
+    .text((d) => d.label);
+   
   const yTicks = innerH >= 380 ? d3.range(1, 21) : [1, 5, 10, 15, 20];
   plot.select(".grid")
     .selectAll("line")
