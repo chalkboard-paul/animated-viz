@@ -429,7 +429,7 @@ async function play(token) {
     const row = target[target.length - 1];
     setPosition(row.pos);
     setDetail(`Matchweek ${week} of ${WEEKS} · ${row.pts} points`);
-    setViewLabel(week < WINDOW ? "Opening matchweeks" : "Last 3 matchweeks");
+    setViewLabel(week < WINDOW ? "Opening matchweeks" : "Rolling 3 matchweeks");
   }
 
   if (token !== runToken) return;
