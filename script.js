@@ -183,6 +183,7 @@ function draw(points, domain) {
     const plot = svg.append("g").attr("class", "plot");
     plot.append("g").attr("class", "zones");
     plot.append("g").attr("class", "grid");
+     plot.append("g").attr("class", "x-grid");
     plot.append("path").attr("class", "area");
     plot.append("path").attr("class", "line-under");
     plot.append("path").attr("class", "line");
@@ -256,6 +257,29 @@ function draw(points, domain) {
     .attr("y1", (d) => y(d))
     .attr("y2", (d) => y(d))
     .attr("stroke", (d) => (d === 4 || d === 17 ? "#e6dfd6" : "#f4f0ea"));
+
+  const verticalGridOpacity = Math.max(
+    0,
+    Math.min(1, (8 - (domain[1] - domain[0])) / 6)
+  );
+  const gridWeeks = verticalGridOpacity > 0
+    ? d3.range(
+      Math.ceil(domain[0] - 1e-6),
+      Math.floor(domain[1] + 1e-6) + 1
+    )
+    : [];
+
+  plot.select(".x-grid")
+    .attr("opacity", verticalGridOpacity)
+    .selectAll("line")
+    .data(gridWeeks)
+    .join("line")
+    .attr("x1", (week) => x(week))
+    .attr("x2", (week) => x(week))
+    .attr("y1", 0)
+    .attr("y2", innerH)
+    .attr("stroke", "#e7e2da")
+    .attr("stroke-width", 1);
 
   const line = d3.line()
     .x((d) => x(d.week))
